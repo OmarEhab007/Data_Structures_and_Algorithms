@@ -1,5 +1,5 @@
-# Problem Statement
-# You are given a non-negative number in the form of list elements. For example, the number 123 would be provided as arr = [1, 2, 3]. Add one to the number and return the output in the form of a new list.
+# Problem Statement You are given a non-negative number in the form of list elements. For example, the number 123
+# would be provided as arr = [1, 2, 3]. Add one to the number and return the output in the form of a new list.
 #
 # Example 1:
 #
@@ -11,7 +11,7 @@
 # output = [1, 0, 0, 0]
 
 def list_to_string(input_list: list) -> str:
-    string = str()
+    string: str = str()
     for i in input_list:
         string += str(i)
     return string
@@ -30,9 +30,10 @@ def string_to_list(string: str) -> list:
 def add_one(input_list: list) -> list:
     return string_to_list(string_add_one(list_to_string(input_list)))
 
-# %% Test zone
 
+# %% Test zone
 
 a = [1, 1, 2, 3]
 test = add_one(a)
-print(test)
+print("output: ", test)
+
