@@ -2,7 +2,7 @@
 For this exercise we are going to implement an HTTPRouter like you would
 find in a typical web server using the Trie data structure we learned previously.
 
-There are many different implementations of HTTP Routers
+There are many implementations of HTTP Routers
 such as regular expressions or simple string matching,
 but the Trie is an excellent and very efficient data structure for this purpose.
 
@@ -17,10 +17,10 @@ the one we used for autocomplete.
 Instead of simple words the Trie will contain a part of the http path
 at each node, building from the root node /
 
-In addition to a path though,
-we need to know which function will handle the http request.
-طIn a real router we would probably pass an instance of a class like Python's
-SimpleHTTPRequestHandler which would be responsible for handling requests to that path. For the sake of simplicity we will just use a string that we can print out to ensure we got the right handler
+In addition to a path though, we need to know which function will handle the http request. طIn a real router we would 
+probably pass an instance of a class like Python's SimpleHTTPRequestHandler which would be responsible for handling 
+requests to that path. For the sake of simplicity we will just use a string that we can print out to ensure we got 
+the right handler 
 
 We could split the path into letters similar
 to how we did the autocomplete Trie, but this would result
@@ -32,8 +32,9 @@ A Trie with a single path entry of: "/about/me" would look like:
 
 (root, None) -> ("about", None) -> ("me", "About Me handler")
 
-We can also simplify our RouteTrie a bit by excluding the suffixes method and the endOfWord property on RouteTrieNodes. We really just need to insert and find nodes, and if a RouteTrieNode is not a leaf node, it won't have a handler which is fine.
-"""
+We can also simplify our RouteTrie a bit by excluding the suffixes method and the endOfWord property on 
+RouteTrieNodes. We really just need to insert and find nodes, and if a RouteTrieNode is not a leaf node, 
+it won't have a handler which is fine. """
 """
 Next we need to implement the actual Router.
 The router will initialize itself with a RouteTrie
@@ -52,6 +53,7 @@ A request for '/about' or '/about/' are probably looking for the same page.
 Requests for '' or '/' are probably looking for the root handler.
 Handle these edge cases in your Router.
 """
+
 
 # A RouteTrieNode will be similar to our autocomplete TrieNode... with one additional element, a handler.
 class RouteTrieNode:
@@ -83,6 +85,7 @@ class RouteTrieNode:
                 desc += str(key) + "=>" + str(value)
 
         return desc
+
 
 # A RouteTrie will store our routes and their associated handlers
 
@@ -144,7 +147,7 @@ class Router:
         # as a list to the RouteTrie
         path_parts = self._split_path(url_path)
 
-        if path_parts != None:
+        if path_parts is not None:
             self.root_trie.insert(path_parts, handler)
 
     def lookup(self, url_path):
@@ -185,9 +188,9 @@ class Router:
 # Here are some test cases and expected outputs you can use to test your implementation
 
 
-def test_function(test_case):
-    url_handler = test_case[0].lookup(test_case[1])
-    solution = test_case[2]
+def test_function(test):
+    url_handler = test[0].lookup(test[1])
+    solution = test[2]
     if url_handler == solution:
         return "Pass"
     else:
@@ -231,12 +234,10 @@ test_case = [router, url, solution]
 test = test_function(test_case)
 print('router.lookup("{}"):  {} \t{}'.format(str(url), solution, test))
 
-
 # Add route
 router.add_handler("/home/about", "about handler")  # add a route
 
 print('\nRoute:\t router.add_handler("/home/about", "about handler")')
-
 
 # some lookups with the expected output
 print('\n---- \t Testing lookups search miss \t -----')
